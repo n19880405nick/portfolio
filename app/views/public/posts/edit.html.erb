@@ -1,0 +1,22 @@
+<h1>投稿編集</h1>
+
+<%= form_with model: @post, url: post_path(@post.id), method: :patch do |f| %>
+  <div>
+    <p>題名 :</p>
+    <%= f.text_field :title %>
+  </div>
+
+  <div>
+    <p>投稿本文　：</p>
+    <%= f.text_area :contribution %>
+  </div>
+
+  <div>
+    <%= f.submit "編集する" %>
+  </div>
+<% end %>
+
+
+<p>削除すると、コメント及びいいねも削除されます。</p>
+<%= link_to "削除する", post_path(@post.id), method: :delete,
+  data: {confirm: "本当に削除しますか？"}, class: "btn btn-danger ml-3" %>

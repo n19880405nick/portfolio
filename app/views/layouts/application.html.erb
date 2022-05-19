@@ -6,11 +6,26 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <header class="border-bottom border-dark" style="height: 150px">
+      <% if user_signed_in? %>
+              <%= link_to destroy_user_session_path, method: :delete do %>
+                <button class="btn btn-outline-secondary mx-2">ユーザーログアウト</button>
+              <% end %>
+            <% elsif admin_signed_in? %>
+              <%= link_to destroy_admin_session_path, method: :delete do %>
+                <button class="btn btn-outline-secondary mx-2">管理者ログアウト</button>
+              <% end %>
+      <% end %>
+
+    </header>
     <%= yield %>
+    <footer class="border-top border-dark" style="height: 150px">
+
+    </footer>
   </body>
 </html>

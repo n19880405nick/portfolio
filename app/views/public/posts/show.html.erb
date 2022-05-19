@@ -1,0 +1,9 @@
+<h2><%= @post.user.name+"さんの" %></h2>
+<h1><%= @post.title %></h1>
+<% if @post.user_id == current_user.id %>
+  <%= link_to "投稿を編集する", edit_post_path(@post.id) %>
+<% end %>
+
+<div>
+  <%= @post.contribution %>
+</div>

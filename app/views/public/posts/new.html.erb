@@ -1,0 +1,18 @@
+<h1>新規投稿</h1>
+
+<%= form_with model: @post, url: posts_path do |f| %>
+  <div>
+    <p>題名 :</p>
+    <%= f.text_field :title %>
+  </div>
+
+  <div>
+    <p>投稿本文　：</p>
+    <%= f.text_area :contribution %>
+  </div>
+
+  <div>
+    <%= f.submit "投稿する" %>
+  </div>
+
+<% end %>
