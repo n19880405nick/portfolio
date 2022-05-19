@@ -7,3 +7,21 @@
 <div>
   <%= @post.contribution %>
 </div>
+
+
+<div>
+  <% @comments.each do |comment| %>
+    <%= comment.user.name+"さん" %>
+    <%= comment.comment %>
+    <% if comment.user_id == current_user.id %>
+      <%= link_to "削除する", post_comment_path(@post.id, comment.id),method: :delete,
+      data: {confirm: "削除しますか？"}, class: "btn btn-danger" %>
+    <% end %>
+  <% end %><br>
+</div>
+<div>
+  <%= form_with model: @comment, url: post_comments_path(@post.id) do |f| %>
+    <%= f.text_field :comment %>
+    <%= f.submit "コメントする", class: "btn btn-success" %>
+  <% end %>
+</div>

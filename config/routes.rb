@@ -6,7 +6,9 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root to: "homes#top"
-    resources :posts
+    resources :posts do
+      resources :comments, only: [:destroy, :create]
+    end
   end
 
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
