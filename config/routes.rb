@@ -1,14 +1,12 @@
 Rails.application.routes.draw do
 
-  namespace :admin do
-
-  end
-
   scope module: :public do
     root to: "homes#top"
     resources :posts do
       resources :comments, only: [:destroy, :create]
+      resource :likes, only: [:create, :destroy]
     end
+    get "posts/likes" => "likes#index", as: "likes"
   end
 
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
