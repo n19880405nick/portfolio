@@ -15,7 +15,10 @@
       <% if user_signed_in? %>
               <%= link_to destroy_user_session_path, method: :delete do %>
                 <button class="btn btn-outline-secondary mx-2">ユーザーログアウト</button>
-              <% end %>
+              <% end %><br>
+              <%= link_to my_page_path do %>
+                <button class="btn btn-outline-secondary mx-2">マイページ</button>
+              <% end %><br>
             <% elsif admin_signed_in? %>
               <%= link_to destroy_admin_session_path, method: :delete do %>
                 <button class="btn btn-outline-secondary mx-2">管理者ログアウト</button>
@@ -25,7 +28,10 @@
     </header>
     <%= yield %>
     <footer class="border-top border-dark" style="height: 150px">
-
+      <%= form_with url: search_path do  |f| %>
+        <%= f.search_field :keyword, placeholder: "キーワードを入力してください" %>
+        <%= f.submit "検索" %>
+      <% end %>
     </footer>
   </body>
 </html>

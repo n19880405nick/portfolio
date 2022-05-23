@@ -1,40 +1,48 @@
 <h2><%= @post.user.name+"さんの" %></h2>
 <h1><%= @post.title %></h1>
-<% if @post.user_id == current_user.id %>
-  <%= link_to "投稿を編集する", edit_post_path(@post.id) %>
-<% end %>
-
 <div>
   <%= @post.contribution %>
 </div>
 
-<% if @post.liked_by?(current_user) %>
-  <p>
-    <%= link_to post_likes_path(@post), method: :delete do %>
-      ♥<%= @post.likes.count %>good!
-    <% end %>
-  </p>
-  <% else %>
-  <p>
-    <%= link_to post_likes_path(@post), method: :post do %>
-      ♡<%= @post.likes.count %>good!
-    <% end %>
-  </p>
+<% if user_signed_in? %>
+  <% if @post.user_id == current_user.id %>
+    <%= link_to "投稿を編集する", edit_post_path(@post.id) %>
+  <% end %>
+
+  <% if @post.liked_by?(current_user) %>
+    <p>
+      <%= link_to post_likes_path(@post), method: :delete do %>
+        ♥<%= @post.likes.count %>good!
+      <% end %>
+    </p>
+    <% else %>
+    <p>
+      <%= link_to post_likes_path(@post), method: :post do %>
+        ♡<%= @post.likes.count %>good!
+      <% end %>
+    </p>
+  <% end %>
+<% else %>
+  <p> ♥<%= @post.likes.count %>good!</p>
 <% end %>
 
 <div>
   <% @comments.each do |comment| %>
     <%= comment.user.name+"さん" %>
     <%= comment.comment %>
-    <% if comment.user_id == current_user.id %>
-      <%= link_to "削除する", post_comment_path(@post.id, comment.id),method: :delete,
-      data: {confirm: "削除しますか？"}, class: "btn btn-danger" %>
+    <% if user_signed_in? %>
+      <% if comment.user_id == current_user.id %>
+        <%= link_to "削除する", post_comment_path(@post.id, comment.id),method: :delete,
+        data: {confirm: "削除しますか？"}, class: "btn btn-danger" %>
+      <% end %>
     <% end %>
   <% end %><br>
 </div>
 <div>
-  <%= form_with model: @comment, url: post_comments_path(@post.id) do |f| %>
-    <%= f.text_field :comment %>
-    <%= f.submit "コメントする", class: "btn btn-success" %>
+  <% if user_signed_in? %>
+    <%= form_with model: @comment, url: post_comments_path(@post.id) do |f| %>
+      <%= f.text_field :comment %>
+      <%= f.submit "コメントする", class: "btn btn-success" %>
+    <% end %>
   <% end %>
 </div>

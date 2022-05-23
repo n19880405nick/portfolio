@@ -1,14 +1,5 @@
 Rails.application.routes.draw do
 
-  scope module: :public do
-    root to: "homes#top"
-    resources :posts do
-      resources :comments, only: [:destroy, :create]
-      resource :likes, only: [:create, :destroy]
-    end
-    get "posts/likes" => "likes#index", as: "likes"
-  end
-
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
@@ -17,5 +8,25 @@ Rails.application.routes.draw do
     registrations: "public/registrations",
     sessions: "public/sessions"
   }
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  scope module: :public do
+    root to: "homes#top"
+    post "search_result" => "homes#search", as: "search"
+    resources :posts do
+      resources :comments, only: [:destroy, :create]
+      resource :likes, only: [:create, :destroy]
+    end
+    resources :users, only: [:edit,:update] do
+      member do
+        get :posts
+      end
+      collection do
+        get :likes
+      end
+    end
+    get "users/my_page" => "users#show", as: "my_page"
+    get "users/unsubscribe" => "users#unsubscribe", as: "unsubscribe"
+    get "users/withdraw" => "users#withdraw", as: "withdraw"
+  end
+
 end

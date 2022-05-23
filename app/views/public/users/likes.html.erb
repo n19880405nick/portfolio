@@ -1,6 +1,6 @@
 <h1>いいねした投稿一覧</h1>
 
-<% @posts.each do |post| %>
+<% @like_posts.each do |post| %>
   <%= link_to post_path(post.id) do %>
     <div>
       <%= post.user.name+"さん" %>

@@ -1,0 +1,9 @@
+<h1><%= @keyword %> の検索結果</h1>
+
+<% @records.each do |record| %>
+  <%= link_to post_path(record.id) do %>
+    <%= record.user.name %>
+    <%= record.title %>
+    <%= record.contribution %>
+  <% end %>
+<% end %>

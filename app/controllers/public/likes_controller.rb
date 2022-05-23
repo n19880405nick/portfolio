@@ -1,7 +1,4 @@
 class Public::LikesController < ApplicationController
-  def index
-    @posts = Post.where()
-  end
 
   def create
     post = Post.find(params[:post_id])
