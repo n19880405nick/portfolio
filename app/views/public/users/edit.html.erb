@@ -1,2 +1,12 @@
-<h1>Public::Users#edit</h1>
-<p>Find me in app/views/public/users/edit.html.erb</p>
+<%= form_with model: @user, method: :patch do |f| %>
+  <div>
+    <p>名前(ニックネーム)：</p>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <p>メールアドレス：</p>
+    <%= f.text_field :email %>
+  </div>
+  <%= f.submit "情報を変更する", class: "btn btn-success" %>
+<% end %>
+<%= link_to "退会する", unsubscribe_path, class: "btn btn-danger" %>

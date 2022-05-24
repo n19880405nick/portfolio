@@ -16,6 +16,9 @@ Rails.application.routes.draw do
       resources :comments, only: [:destroy, :create]
       resource :likes, only: [:create, :destroy]
     end
+    get "users/my_page" => "users#show", as: "my_page"
+    get "users/unsubscribe" => "users#unsubscribe", as: "unsubscribe"
+    patch "users/withdraw" => "users#withdraw", as: "withdraw"
     resources :users, only: [:edit,:update] do
       member do
         get :posts
@@ -24,9 +27,6 @@ Rails.application.routes.draw do
         get :likes
       end
     end
-    get "users/my_page" => "users#show", as: "my_page"
-    get "users/unsubscribe" => "users#unsubscribe", as: "unsubscribe"
-    get "users/withdraw" => "users#withdraw", as: "withdraw"
     get "tags/:tag_id/posts" => "tags#search", as: "tag_search"
   end
 
