@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     get "users/my_page" => "users#show", as: "my_page"
     get "users/unsubscribe" => "users#unsubscribe", as: "unsubscribe"
     get "users/withdraw" => "users#withdraw", as: "withdraw"
+    get "tags/:tag_id/posts" => "tags#search", as: "tag_search"
   end
 
 end

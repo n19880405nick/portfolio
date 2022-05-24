@@ -1,37 +1,47 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>LuckyNap</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+	<head>
+		<title>LuckyNap</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<%= csrf_meta_tags %>
+		<%= csp_meta_tag %>
 
-    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+		<%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+		<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+	</head>
 
-  <body>
-    <header class="border-bottom border-dark" style="height: 150px">
-      <% if user_signed_in? %>
-              <%= link_to destroy_user_session_path, method: :delete do %>
-                <button class="btn btn-outline-secondary mx-2">ユーザーログアウト</button>
-              <% end %><br>
-              <%= link_to my_page_path do %>
-                <button class="btn btn-outline-secondary mx-2">マイページ</button>
-              <% end %><br>
-            <% elsif admin_signed_in? %>
-              <%= link_to destroy_admin_session_path, method: :delete do %>
-                <button class="btn btn-outline-secondary mx-2">管理者ログアウト</button>
-              <% end %>
-      <% end %>
+	<body>
+		<header class="border-bottom border-dark" style="height: 150px">
+			<% if user_signed_in? %>
+							<%= link_to destroy_user_session_path, method: :delete do %>
+								<button class="btn btn-outline-secondary mx-2">ユーザーログアウト</button>
+							<% end %><br>
+							<%= link_to my_page_path do %>
+								<button class="btn btn-outline-secondary mx-2">マイページ</button>
+							<% end %><br>
+						<% elsif admin_signed_in? %>
+							<%= link_to destroy_admin_session_path, method: :delete do %>
+								<button class="btn btn-outline-secondary mx-2">管理者ログアウト</button>
+							<% end %>
+			<% end %>
 
-    </header>
-    <%= yield %>
-    <footer class="border-top border-dark" style="height: 150px">
-      <%= form_with url: search_path do  |f| %>
-        <%= f.search_field :keyword, placeholder: "キーワードを入力してください" %>
-        <%= f.submit "検索" %>
-      <% end %>
-    </footer>
-  </body>
+		</header>
+		<%= yield %>
+		<footer class="border-top border-dark" style="height: 150px">
+			<div>
+				<%= form_with url: search_path do  |f| %>
+					<%= f.search_field :keyword, placeholder: "キーワードを入力してください" %>
+					<%= f.submit "検索" %>
+				<% end %>
+			</div>
+			<div>
+				<p>最新の投稿に紐づいたタグ</p>
+				<% Tag.order( created_at: :desc).limit(5).each do |tag| %>
+   			  <%= link_to tag_search_path(tag.id) do %>
+     			  <button class="btn btn-primary"><%= tag.tag %></button>
+    			<% end %>
+			  <% end %>
+			</div>
+		</footer>
+	</body>
 </html>

@@ -3,6 +3,13 @@
 <div>
   <%= @post.contribution %>
 </div>
+<div>
+  <% @tags.each do |tag| %>
+    <%= link_to tag_search_path(tag.id) do %>
+      <button class="btn btn-primary"><%= tag.tag %></button>
+    <% end %>
+  <% end %>
+</div>
 
 <% if user_signed_in? %>
   <% if @post.user_id == current_user.id %>

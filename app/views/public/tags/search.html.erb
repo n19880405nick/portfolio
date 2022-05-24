@@ -1,11 +1,11 @@
-<h1><%= @keyword %> の検索結果</h1>
+<h1><%= @tag.tag %> の検索結果</h1>
 
 <% @records.each do |record| %>
-  <div>
-    <%= link_to post_path(record.id) do %>
+  <%= link_to post_path(record.id) do %>
+    <div>
       <%= record.user.name %>
       <%= record.title %>
       <%= record.contribution %>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 <% end %>
