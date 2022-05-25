@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  namespace :admin do
+    get 'posts/show'
+  end
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
@@ -8,6 +11,17 @@ Rails.application.routes.draw do
     registrations: "public/registrations",
     sessions: "public/sessions"
   }
+
+  namespace :admin do
+    get "" => "homes#top", as: "top"
+    resources :users, except: [:new, :create, :destroy] do
+      resources :posts, only: :index
+    end
+    resources :posts, only: [:show, :destroy] do
+      resources :tags, only: :destroy
+      resources :comments, only: :destroy
+    end
+  end
 
   scope module: :public do
     root to: "homes#top"

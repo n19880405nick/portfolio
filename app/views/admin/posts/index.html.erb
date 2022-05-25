@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <h2 class="m-4"><%= @user.name %>さんの投稿一覧</h2>
+    <div class="col-12">
+      <table class="table">
+        <thead>
+          <tr class="table-secondary">
+            <td style="width: 25%">ユーザー氏名</td>
+            <td style="width: 50%">題名</td>
+            <td style="width: 25%">投稿日時</td>
+          </tr>
+        </thead>
+        <% @posts.each do |post| %>
+          <tbody>
+            <tr>
+              <td>
+                <u><%= link_to post.user.name, admin_user_path(post.user_id), class: "text-dark" %></u>
+              </td>
+              <td>
+                <u><%= link_to post.title, admin_post_path(post.id), class: "text-dark" %></u>
+              </td>
+              <td><%= post.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+            </tr>
+          </tbody>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

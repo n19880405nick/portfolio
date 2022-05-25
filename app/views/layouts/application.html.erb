@@ -14,14 +14,20 @@
 		<header class="border-bottom border-dark" style="height: 150px">
 			<% if user_signed_in? %>
 							<%= link_to destroy_user_session_path, method: :delete do %>
-								<button class="btn btn-outline-secondary mx-2">ユーザーログアウト</button>
+								<button class="btn btn-outline-info mx-2">ユーザーログアウト</button>
 							<% end %><br>
 							<%= link_to my_page_path do %>
-								<button class="btn btn-outline-secondary mx-2">マイページ</button>
+								<button class="btn btn-outline-info mx-2">マイページ</button>
 							<% end %><br>
 						<% elsif admin_signed_in? %>
+							<%= link_to admin_users_path do %>
+								<button class="btn btn-outline-info mx-2">ユーザー一覧</button>
+							<% end %><br>
+							<%= link_to admin_top_path do %>
+								<button class="btn btn-outline-info mx-2">投稿一覧</button>
+							<% end %><br>
 							<%= link_to destroy_admin_session_path, method: :delete do %>
-								<button class="btn btn-outline-secondary mx-2">管理者ログアウト</button>
+								<button class="btn btn-outline-info mx-2">管理者ログアウト</button>
 							<% end %>
 			<% end %>
 
@@ -36,10 +42,10 @@
 			</div>
 			<div>
 				<p>最新の投稿に紐づいたタグ</p>
-				<% Tag.order( created_at: :desc).limit(5).each do |tag| %>
-   			  <%= link_to tag_search_path(tag.id) do %>
-     			  <button class="btn btn-primary"><%= tag.tag %></button>
-    			<% end %>
+				<% @tags.each do |tag| %>
+					<%= link_to tag_search_path(tag.id) do %>
+						<button class="btn btn-primary"><%= tag.tag %></button>
+					<% end %>
 			  <% end %>
 			</div>
 		</footer>

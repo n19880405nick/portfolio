@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row">
+    <h2 class="m-4">ユーザー詳細</h2>
+    <div class="col-12">
+      <table class="table table-borderless">
+        <tbody>
+          <tr>
+            <td style="width: 45%" class="text-right">ユーザー氏名</td>
+            <td style="width: 10%"></td>
+            <td style="width: 45%"><%= @user.name %></td>
+          </tr>
+          <tr>
+            <td class="text-right">メールアドレス</td>
+            <td></td>
+            <td><%= @user.email %></td>
+          </tr>
+          <tr>
+            <td class="text-right">ユーザーステータス</td>
+            <td></td>
+            <td>
+              <% if @user.is_active == true %>
+                <p class="text-success">有効</p>
+              <% elsif @user.is_active == false %>
+                <p class="text-secondary">退会</p>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td class="text-right">
+              <%= link_to "このユーザーの投稿一覧を見る", admin_user_posts_path(@user.id), class: "btn btn-primary" %>
+            </td>
+            <td></td>
+            <td>
+              <%= link_to "編集する", edit_admin_user_path(@user.id), class: "btn btn-success" %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

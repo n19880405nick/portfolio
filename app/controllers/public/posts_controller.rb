@@ -22,7 +22,7 @@ class Public::PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @tags = Tag.where(post_id: @post.id)
-    @comments = Comment.all
+    @comments = @post.comments.all
     @comment = Comment.new
   end
 
