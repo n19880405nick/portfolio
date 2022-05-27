@@ -4,7 +4,7 @@
       <h2>投稿詳細</h2>
     </div>
     <div class="col-3 offset-md-5">
-      <h4>♥いいね<%= @post.likes.count %></h4>
+      <h4>♥ <%= @post.likes.count %> いいね</h4>
     </div>
   </div>
   <div class="row mt-3">
@@ -14,22 +14,26 @@
           <tr>
             <td style="width: 16%"></td>
             <td style="width: 14%"><h4><%= @post.user.name %></h4></td>
-            <td colspan="4" class="text-center"><strong><h2><%= @post.title %></h2></strong></td>
+            <td colspan="4" class="text-center"><strong><h2>「<%= @post.title %>」</h2></strong></td>
             <td style="width: 14%">
               <%= link_to "投稿を削除", admin_post_path(@post.id), method: :delete,
                   data: {confirm: "コメントやタグも削除されますがよろしいですか？"}, class: "btn btn-danger" %>
             </td>
           </tr>
-          <tr>
+          <tr class="my-3">
             <td><h4>投稿記事</h4></td>
-            <td colspan="6"><%= @post.contribution %></td>
+            <td colspan="6">
+              <div class="border border-primary rounded">
+                <p class="p-2"><%= @post.contribution %></p>
+              </div>
+            </td>
           </tr>
           <tr>
             <td><h4>タグ</h4></td>
             <td colspan="6">
               <% @post_tags.each do |tag| %>
                 <span class="border border-dark rounded h4"><%= tag.tag %></span>
-                <%= link_to "タグを削除", admin_post_tag_path(@post.id, tag.id), method: :delete, class: "btn btn-danger mr-3" %>
+                <%= link_to "タグを削除", admin_post_tag_path(@post.id, tag.id), method: :delete, class: "btn btn-danger mr-3 mb-3" %>
               <% end %>
             </td>
           </tr>
@@ -41,9 +45,13 @@
             <tr>
               <td></td>
               <td><%= comment.user.name %></td>
-              <td colspan="4"><%= comment.comment %></td>
+              <td colspan="4">
+                <div class="border border-primary rounded">
+                  <p class="p-2"><%= comment.comment %></p>
+                </div>
+              </td>
               <td>
-                <%= link_to "コメント削除", admin_post_comment_path(@post.id, comment.id), method: :delete, class: "btn btn-danger" %>
+                <%= link_to "コメント削除", admin_post_comment_path(@post.id, comment.id), method: :delete, class: "btn btn-danger mb-3" %>
               </td>
             </tr>
           <% end %>

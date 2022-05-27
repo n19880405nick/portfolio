@@ -30,7 +30,7 @@
 - 自分に昼寝は必要だったかどうか、確認するとき
 
 ## 設計書
-<...>
+https://drive.google.com/drive/folders/1-zdvYyUhbBb2-6535G4-sOOnNskYN59y?usp=sharing
 
 ## 開発環境
 - OS：Linux(CentOS)

@@ -2,18 +2,18 @@
   <div class="row">
     <h2 class="m-4">ユーザー編集</h2>
     <%= form_with model: @user, url: admin_user_path(@user.id), method: :patch do |f| %>
-      <div class="co-12 mt-5">
+      <div class="co-12 form-group mt-5">
         <table class="table table-borderless">
           <tbody>
             <tr>
               <td style="width: 50%" class="text-right">ユーザー氏名</td>
               <td style="width: 5%"></td>
-              <td style="width: 45%"><%= f.text_field :name %></td>
+              <td style="width: 45%"><%= f.text_field :name, class: "form-control" %></td>
             </tr>
             <tr>
               <td class="text-right">メールアドレス</td>
               <td></td>
-              <td><%= f.text_field :email %></td>
+              <td><%= f.text_field :email, class: "form-control" %></td>
             </tr>
             <tr>
               <td class="text-right">ユーザーステータス</td>
