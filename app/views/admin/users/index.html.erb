@@ -1,41 +1,41 @@
 <div class="container">
-  <div class="row">
-    <h2 class="m-4">ユーザー一覧</h2>
-    <div class="col-12">
-      <table class="table">
-        <thead>
-          <tr class="table-secondary">
-            <td style="width: 20%">ユーザー氏名</td>
-            <td style="width: 40%">最新投稿題名</td>
-            <td style="width: 25%">投稿日時</td>
-            <td style="width: 15%">ステータス</td>
-          </tr>
-        </thead>
-        <% @users.each do |user| %>
-          <tbody>
-            <tr>
-              <td>
-                <u><%= link_to user.name, admin_user_path(user.id), class: "text-dark" %></u>
-              </td>
-              <% post = user.posts.last %>
-              <% if post.present? %>
-                <td><%= post.title %></td>
-                <td><%= post.created_at.strftime("%Y/%m/%d %H:%M") %></td>
-              <% else %>
-                <td>投稿無し</td>
-                <td>---</td>
-              <% end %>
-              <td>
-                <% if user.is_active == true %>
-                  <p class="text-success">有効</p>
-                <% elsif user.is_active == false %>
-                  <p class="text-secondary">退会</p>
-                <% end %>
-              </td>
-            </tr>
-          </tbody>
-        <% end %>
-      </table>
-    </div>
-  </div>
+	<div class="row">
+		<h2 class="m-4">ユーザー一覧</h2>
+		<div class="col-12">
+			<table class="table">
+				<thead>
+					<tr class="table-secondary">
+						<td style="width: 20%">ユーザー氏名</td>
+						<td style="width: 40%">最新投稿題名</td>
+						<td style="width: 25%">投稿日時</td>
+						<td style="width: 15%">ステータス</td>
+					</tr>
+				</thead>
+				<% @users.each do |user| %>
+					<tbody>
+						<tr>
+							<td>
+								<u><%= link_to user.name, admin_user_path(user.id), class: "text-dark" %></u>
+							</td>
+							<% post = user.posts.last %>
+							<% if post.present? %>
+								<td><%= post.title %></td>
+								<td><%= post.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+							<% else %>
+								<td>投稿無し</td>
+								<td>---</td>
+							<% end %>
+							<td>
+								<% if user.is_active == true %>
+									<p class="text-success">有効</p>
+								<% elsif user.is_active == false %>
+									<p class="text-secondary">退会</p>
+								<% end %>
+							</td>
+						</tr>
+					</tbody>
+				<% end %>
+			</table>
+		</div>
+	</div>
 </div>

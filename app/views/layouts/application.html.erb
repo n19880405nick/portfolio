@@ -6,47 +6,83 @@
 		<%= csrf_meta_tags %>
 		<%= csp_meta_tag %>
 
-		<%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
 		<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+		<%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+		<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+		<!--"YuseiMagic" is lisenced under the SIL Open Font License-->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap" rel="stylesheet">
 	</head>
 
 	<body>
-		<header class="border-bottom border-dark" style="height: 150px">
-			<% if user_signed_in? %>
+		<header class="border rounded-pill border-info">
+			<nav class="navbar">
+				<div class="container">
+					<a class="nav-brand" href="/"><%= image_tag('cooltext411810024662321.png') %></a>
+					<form class="form-inline ml-auto">
+						<% if user_signed_in? %>
 							<%= link_to destroy_user_session_path, method: :delete do %>
 								<button class="btn btn-outline-info mx-2">ユーザーログアウト</button>
-							<% end %><br>
+							<% end %>
 							<%= link_to my_page_path do %>
 								<button class="btn btn-outline-info mx-2">マイページ</button>
-							<% end %><br>
+							<% end %>
 						<% elsif admin_signed_in? %>
 							<%= link_to admin_users_path do %>
 								<button class="btn btn-outline-info mx-2">ユーザー一覧</button>
-							<% end %><br>
+							<% end %>
 							<%= link_to admin_top_path do %>
 								<button class="btn btn-outline-info mx-2">投稿一覧</button>
-							<% end %><br>
+							<% end %>
 							<%= link_to destroy_admin_session_path, method: :delete do %>
 								<button class="btn btn-outline-info mx-2">管理者ログアウト</button>
 							<% end %>
-			<% end %>
-
+						<% else %>
+							<%= link_to new_user_registration_path do %>
+								<button class="btn btn-outline-info mx-2">新規登録</button>
+							<% end %>
+							<%= link_to new_user_session_path do %>
+								<button class="btn btn-outline-info mx-2">ログイン</button>
+							<% end %>
+						<% end %>
+					</form>
+				</div>
+			</nav>
 		</header>
-		<%= yield %>
-		<footer class="border-top border-dark" style="height: 150px">
-			<div>
-				<%= form_with url: search_path do  |f| %>
-					<%= f.search_field :keyword, placeholder: "キーワードを入力してください" %>
-					<%= f.submit "検索" %>
-				<% end %>
-			</div>
-			<div>
-				<p>最新の投稿に紐づいたタグ</p>
-				<% @tags.each do |tag| %>
-					<%= link_to tag_search_path(tag.id) do %>
-						<button class="btn btn-primary"><%= tag.tag %></button>
-					<% end %>
-			  <% end %>
+		<main>
+			<%= yield %>
+		</main>
+		<footer class="border-top border-dark">
+			<div class="container">
+				<div class="row">
+					<div class="col-6 mt-3">
+
+					</div>
+					<div class="col-6 mt-2 form-group">
+						<table class="table table-borderless">
+							<thead>
+								<tr>
+									<%= form_with url: search_path do  |f| %>
+										<td style="width: 85%">
+											<%= f.search_field :keyword, placeholder: "キーワードを入力してください", class: "form-control" %>
+										</td>
+										<td style="width: 15%">
+											<%= f.submit "検索", class: "form-control" %>
+										</td>
+									<% end %>
+								</tr>
+							</thead>
+						</table>
+						<p>最新の投稿に紐づいたタグ</p>
+						<% @tags.each do |tag| %>
+							<%= link_to tag_search_path(tag.id) do %>
+								<button class="btn btn-primary"><%= tag.tag %></button>
+							<% end %>
+						<% end %>
+					</div>
+				</div>
 			</div>
 		</footer>
 	</body>
