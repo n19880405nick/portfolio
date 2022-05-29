@@ -1,1 +1,12 @@
-<h1 class="btn btn-primary">top</h1>
+<div class="image text-center">
+  <%= image_tag("top", class: "text-center") %>
+</div>
+<div class="cluod1"><%= image_tag("cloud") %></div>
+<div class="cloud2"><%= image_tag("cloud2") %></div>
+<div class="about">
+  <h3>
+    昼寝をする幸せを、<br>
+    みんなで共有しよう～。<br>
+    <%= link_to "投稿を見てみよう！", posts_path, class: "btn btn-success ml-4 mt-3" %>
+  </h3>
+</div>

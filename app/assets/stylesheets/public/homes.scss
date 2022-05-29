@@ -1,3 +1,35 @@
-// Place all the styles related to the public/homes controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+.image{
+  max-width: 100%;
+  height: auto;
+}
+
+.cluod1{
+  position: absolute;
+  top: -50px;
+  animation: fuwafuwa 6s infinite ease-in-out .10s alternate;
+}
+
+.cloud2{
+  position: absolute;
+  top: -100px;
+  right: 0;
+  animation: fuwafuwa 4s infinite ease-in-out .8s alternate;
+}
+
+@keyframes fuwafuwa{
+  0% {
+    transform: translate(0,0) rotate(-5deg);
+  }
+  50% {
+    transform: translate(0,-14px) rotate(0deg);
+  }
+  100% {
+    transform: translate(0,0) rotate(5deg);
+  }
+}
+
+.about{
+  position: absolute;
+  top: 46%;
+  left: 51%;
+}
