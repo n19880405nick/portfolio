@@ -23,11 +23,17 @@
 					<a class="nav-brand" href="/"><%= image_tag('cooltext411810024662321.png') %></a>
 					<form class="form-inline ml-auto">
 						<% if user_signed_in? %>
-							<%= link_to destroy_user_session_path, method: :delete do %>
-								<button class="btn btn-outline-info mx-2">ユーザーログアウト</button>
-							<% end %>
 							<%= link_to my_page_path do %>
 								<button class="btn btn-outline-info mx-2">マイページ</button>
+							<% end %>
+							<%= link_to new_post_path do %>
+								<button class="btn btn-outline-info mx-2">新規投稿</button>
+							<% end %>
+							<%= link_to posts_path do %>
+								<button class="btn btn-outline-info mx-2">投稿一覧</button>
+							<% end %>
+							<%= link_to destroy_user_session_path, method: :delete do %>
+								<button class="btn btn-outline-info mx-2">ユーザーログアウト</button>
 							<% end %>
 						<% elsif admin_signed_in? %>
 							<%= link_to admin_users_path do %>
@@ -57,7 +63,7 @@
 		<footer class="border-top border-dark">
 			<div class="container">
 				<div class="row">
-					<div class="col-6 mt-3 d-flex">
+					<div class="col-12 col-md-6 mt-3 d-flex">
 						<%= image_tag("IMG_0044.jpg", :size => "100x140") %>
 						<p class="mt-2 ml-5">
 							製作者より<br><br>
@@ -67,7 +73,7 @@
 							日常を送って頂けたら幸いです。
 						</p>
 					</div>
-					<div class="col-6 mt-2 form-group">
+					<div class="col-12 col-md-6 mt-2 form-group">
 						<table class="table table-borderless">
 							<thead>
 								<tr>
@@ -85,7 +91,7 @@
 						<p>最新の投稿に紐づいたタグ</p>
 						<% @tags.each do |tag| %>
 							<%= link_to tag_search_path(tag.id) do %>
-								<button class="btn btn-primary"><%= tag.tag %></button>
+								<button class="btn btn-primary ml-3"><%= tag.tag %></button>
 							<% end %>
 						<% end %>
 					</div>

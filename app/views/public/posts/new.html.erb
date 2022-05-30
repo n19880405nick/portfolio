@@ -1,18 +1,37 @@
-<h1>新規投稿</h1>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-4 offset-md-2 my-3">
+      <h1>新規投稿</h1>
+    </div>
+    <div class="col-6 my-3">
+      <p>
+        昼寝をすることで体験したことや、<br>
+        寝ているときに見た夢など、<br>
+        あなたの昼寝エピソードを投稿してみましょう！
+      </p>
+    </div>
+    <div class="col-8">
+      <%= form_with model: @post, url: posts_path do |f| %>
+        <div class="form-group">
+          <h3>題名</h3>
+          <%= f.text_field :title, class: "form-control" %>
+        </div>
 
-<%= form_with model: @post, url: posts_path do |f| %>
-  <div>
-    <p>題名 :</p>
-    <%= f.text_field :title %>
+        <div class="form-group">
+          <h3>投稿本文</h3>
+          <p class="text-info">ハッシュタグ使えます　例「本文　#〇〇〇」</p>
+          <%= f.text_area :contribution, class: "form-control", rows: 10 %>
+        </div>
+
+        <p class="my-3">
+          公序良俗に反する内容の書き込みはご遠慮ください。<br>
+          また、プライバシーに関する情報にはご注意ください。
+        </p>
+        <div class="my-5">
+          <%= f.submit "投稿する", class: "btn btn-success" %>
+        </div>
+      <% end %>
+    </div>
   </div>
+</div>
 
-  <div>
-    <p>投稿本文　：</p>
-    <%= f.text_area :contribution %>
-  </div>
-
-  <div>
-    <%= f.submit "投稿する" %>
-  </div>
-
-<% end %>

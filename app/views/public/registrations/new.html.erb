@@ -1,36 +1,49 @@
-<h2>新規登録</h2>
+<div class ="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-4 offset-md-2 my-3">
+      <h2>新規登録</h2>
+    </div>
+    <div class="col-6 my-3">
+      <p>
+        登録して頂くと、記事の投稿、コメントおよび<br>
+        いいね（お気に入り登録）をすることができます。<br>
+        また、お昼寝をいつ、何分したかのカレンダーもつけられます。
+      </p>
+    </div>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "public/shared/error_messages", resource: resource %>
+      <div class="field form-group">
+        <%= f.label :name, "名前（ニックネーム）" %><br>
+        <%= f.text_field :name, autofocus: true, class: "form-control", :required => true %>
+      </div>
 
-  <div class="field">
-    <%= f.label :name, "名前" %><br>
-    <%= f.text_field :name, autofocus: true %>
+      <div class="field form-group">
+        <%= f.label :email, "メールアドレス" %><br />
+        <%= f.email_field :email, autocomplete: "email", class: "form-control", :required => true %>
+      </div>
+
+      <div class="field form-group">
+        <%= f.label :password, "パスワード" %>
+        <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> 文字以上)</em>
+        <% end %>
+        <%= f.password_field :password, autocomplete: "new-password", class: "form-control", :required => true %>
+      </div>
+
+      <div class="field form-group">
+        <%= f.label :password_confirmation, "パスワード再入力" %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", :required => true %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "新規登録する", class: "btn btn-success" %>
+      </div>
+
+      <p class="my-5">登録済の方は
+        <%= link_to "こちら", new_user_session_path %>
+        から
+      </p>
+
+    <% end %>
   </div>
-
-  <div class="field">
-    <%= f.label :email, "メールアドレス" %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password, "パスワード" %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> 文字以上)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation, "パスワード再入力" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <p>登録済の方は
-    <%= link_to "こちら", new_user_session_path %>
-    から
-  </p>
-  <div class="actions">
-    <%= f.submit "新規登録する" %>
-  </div>
-<% end %>
+</div>

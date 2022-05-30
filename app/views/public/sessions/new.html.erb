@@ -1,22 +1,28 @@
-<h2>ログイン</h2>
+<div class ="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-4 offset-md-2 my-3">
+      <h2>ログイン</h2>
+    </div>
+    <div class="col-6 my-3"></div>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="field form-group">
+        <%= f.label :email, "メールアドレス" %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", :required => true %>
+      </div>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email, "メールアドレス" %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      <div class="field form-group">
+        <%= f.label :password, "パスワード" %><br />
+        <%= f.password_field :password, autocomplete: "current-password", class: "form-control", :required => true %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "ログイン", class: "btn btn-success my-3" %>
+      </div>
+
+      <p class="my-5">新規登録のかたは
+        <%= link_to "こちら", new_user_registration_path %>
+        から
+      </p>
+    <% end %>
   </div>
-
-  <div class="field">
-    <%= f.label :password, "パスワード" %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <p>新規登録のかたは
-    <%= link_to "こちら", new_user_registration_path %>
-    から
-  </p>
-
-  <div class="actions">
-    <%= f.submit "ログイン" %>
-  </div>
-<% end %>
+</div>
