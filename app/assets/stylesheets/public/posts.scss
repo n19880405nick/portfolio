@@ -1,3 +1,13 @@
 // Place all the styles related to the public/posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.text-box{
+    background: #fff0cd;
+    box-shadow: 0px 0px 0px 5px #fff0cd;
+    border: dashed 2px gray;
+    margin: 1em;
+    padding: 0.2em 0.5em;
+    color: #454545;
+    max-width: 90%;
+}

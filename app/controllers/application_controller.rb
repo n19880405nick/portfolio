@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
 	before_action :get_latest_tag
 
 	def get_latest_tag
-		@tags = Tag.order( created_at: :desc).limit(5)
+		@tags_all = Tag.order( created_at: :desc).limit(5)
 	end
 
 	protected

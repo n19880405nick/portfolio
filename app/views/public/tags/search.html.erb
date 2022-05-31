@@ -1,11 +1,8 @@
-<h1><%= @tag.tag %> の検索結果</h1>
-
-<% @records.each do |record| %>
-  <%= link_to post_path(record.id) do %>
-    <div>
-      <%= record.user.name %>
-      <%= record.title %>
-      <%= record.contribution %>
-    </div>
-  <% end %>
-<% end %>
+<div class="container">
+  <div class="row">
+		<div class="col-10 offset-md-2 my-4">
+			<h1><%= @tag.tag %> の検索結果</h1>
+		</div>
+		<%= render 'public/homes/index', posts: @records %>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<% posts.each do |post| %>
+  <div class="col-6 col-md-4">
+		<div class="card p-3" style="background-color: #fbff94">
+		  <div class="card-body">
+				<h3 class="card-title border-bottom border-dark"><%= post.title %></h3>
+				<h5 class="text-right">♥ <%= post.likes.count %></h5>
+				<h6 class="card-subtitle mb-4 text-muted"><%= post.user.name+"さん" %></h6>
+				<p class="card-text text-truncate"><%= post.contribution %></p>
+				<%= link_to "この記事を読む", post_path(post.id), class: "h4" %>
+		  </div>
+		  <div class="card-footer">
+				<small class="text-muted">更新日時：<%= post.updated_at.strftime('%m/%d %H:%M') %></small>
+		  </div>
+		</div>
+  </div>
+<% end %>

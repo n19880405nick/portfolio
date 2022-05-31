@@ -1,11 +1,8 @@
-<h1>いいねした投稿一覧</h1>
-
-<% @like_posts.each do |post| %>
-  <%= link_to post_path(post.id) do %>
-    <div>
-      <%= post.user.name+"さん" %>
-      <%= post.title %>
-      <%= post.contribution %>
-    </div>
-  <% end %>
-<% end %>
+<div class="container">
+  <div class="row">
+		<div class="col-10 offset-md-2 my-4">
+			<h1>いいねした投稿一覧</h1>
+		</div>
+		<%= render 'public/homes/index', posts: @like_posts %>
+  </div>
+</div>

@@ -1,55 +1,58 @@
-<h2><%= @post.user.name+"さんの" %></h2>
-<h1><%= @post.title %></h1>
-<div>
-  <%= @post.contribution %>
-</div>
-<div>
-  <% @tags.each do |tag| %>
-    <%= link_to tag_search_path(tag.id) do %>
-      <button class="btn btn-primary"><%= tag.tag %></button>
+<div class="container my-5 p-3" style="background-color: #fbff94; border: dashed 2px orange; border-radius: 8px">
+  <div class="row">
+    <div class="col-12 d-flex my-3">
+      <h3 class="mt-2"><%= @post.user.name+"さんの" %></h3>
+      <h1 class="mx-5"><u><%= @post.title %></u></h1>
+    </div>
+    <div class="col-12 text-box text-break">
+      <h5><%= @post.contribution %></h5>
+    </div>
+    <div class="col-8 d-flex my-3 mt-2">
+      <p class="mr-3 mt-2">含まれるタグ</p>
+      <% @tags.each do |tag| %>
+        <%= link_to tag_search_path(tag.id) do %>
+          <button class="btn btn-primary mx-3 rounded-pill"><%= tag.tag %></button>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-4 d-flex my-3">
+      <% if user_signed_in? %>
+        <% if @post.user_id == current_user.id %>
+          <%= link_to "投稿を編集する", edit_post_path(@post.id), class: "btn btn-success" %>
+        <% end %>
+        <div id="like_btn_<%= @post.id %>">
+          <%= render 'public/likes/like', post: @post %>
+        </div>
+      <% else %>
+        <p class="ml-3 mt-2"> ♥ <%= @post.likes.count %> good!</p>
+      <% end %>
+    </div>
+    <% @comments.each do |comment| %>
+      <div class="col-12 d-flex my-2">
+        <h4 class="mt-4"><%= comment.user.name+"さん" %></h4>
+        <h5 class="text-box text-break" style="width: 70%"><%= comment.comment %></h5>
+        <% if user_signed_in? %>
+          <% if comment.user_id == current_user.id %>
+            <p><%= link_to "削除する", post_comment_path(@post.id, comment.id),method: :delete,
+              data: {confirm: "削除しますか？"}, class: "btn btn-danger mt-3" %></p>
+          <% end %>
+        <% end %>
+      </div>
     <% end %>
-  <% end %>
-</div>
-
-<% if user_signed_in? %>
-  <% if @post.user_id == current_user.id %>
-    <%= link_to "投稿を編集する", edit_post_path(@post.id) %>
-  <% end %>
-
-  <% if @post.liked_by?(current_user) %>
-    <p>
-      <%= link_to post_likes_path(@post), method: :delete do %>
-        ♥<%= @post.likes.count %>good!
-      <% end %>
-    </p>
-    <% else %>
-    <p>
-      <%= link_to post_likes_path(@post), method: :post do %>
-        ♡<%= @post.likes.count %>good!
-      <% end %>
-    </p>
-  <% end %>
-<% else %>
-  <p> ♥<%= @post.likes.count %>good!</p>
-<% end %>
-
-<div>
-  <% @comments.each do |comment| %>
-    <%= comment.user.name+"さん" %>
-    <%= comment.comment %>
     <% if user_signed_in? %>
-      <% if comment.user_id == current_user.id %>
-        <%= link_to "削除する", post_comment_path(@post.id, comment.id),method: :delete,
-        data: {confirm: "削除しますか？"}, class: "btn btn-danger" %>
-      <% end %>
+      <div class="col-12 form-group my-2">
+        <table class="table table-borderless">
+          <thead>
+            <tr>
+              <%= form_with model: @comment, url: post_comments_path(@post.id) do |f| %>
+                <td style="width: 15%"></td>
+                <td style="width: 70%"><%= f.text_area :comment, class: "form-control", rows: 2 %></td>
+                <td style="width: 15%"><%= f.submit "コメントする", class: "btn btn-success" %></td>
+              <% end %>
+            </tr>
+          </thead>
+        </table>
+      </div>
     <% end %>
-  <% end %><br>
-</div>
-<div>
-  <% if user_signed_in? %>
-    <%= form_with model: @comment, url: post_comments_path(@post.id) do |f| %>
-      <%= f.text_field :comment %>
-      <%= f.submit "コメントする", class: "btn btn-success" %>
-    <% end %>
-  <% end %>
+  </div>
 </div>
