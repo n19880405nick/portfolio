@@ -7,9 +7,43 @@
     <div class="col-3 offset-md-2 mt-3">
       <%= link_to "情報を編集", edit_user_path(current_user.id), class: "btn btn-success" %>
     </div>
-    <div class="col-12 my-5">
-      カレンダー
+  </div>
+
+  <div class="row">
+    <div class="col-3 my-5">
+      <table class="table table-borderd">
+        <thead>
+          <tr>
+            <th colspan="7" class="text-center">
+              <%= @before_prev_month.year.to_s %>   <%= @before_prev_month.month.to_s %>
+            </th>
+          </tr>
+          <tr>
+            <td>日</td>
+            <td>月</td>
+            <td>火</td>
+            <td>水</td>
+            <td>木</td>
+            <td>金</td>
+            <td>土</td>
+          </tr>
+        </thead>
+        <tbody>
+          <% @before_prev_month_days.each_with_index do |day, i| %>
+            <% if (i == 0) || (i % 7 == 0) %>
+              <tr>
+            <% end %>
+            <td><%= day %></td>
+            <% if i == 6 %>
+             </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
     </div>
+  </div>
+
+  <div class="row">
     <div class="col-6 offset-md-3 d-flex">
       <div >
         <%= link_to posts_user_path(current_user.id) do %>

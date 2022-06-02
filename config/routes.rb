@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
 
-  namespace :admin do
-    get 'posts/show'
-  end
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
@@ -40,6 +37,7 @@ Rails.application.routes.draw do
       collection do
         get :likes
       end
+      resources :calendars, only: :update
     end
     get "tags/:tag_id/posts" => "tags#search", as: "tag_search"
   end

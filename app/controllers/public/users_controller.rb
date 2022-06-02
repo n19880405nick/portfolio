@@ -1,5 +1,24 @@
 class Public::UsersController < ApplicationController
   def show
+    now = Date.current
+    @before_prev_month = now.ago(2.month)
+    before_prev_month_first_day = @before_prev_month.beginning_of_month.day
+    before_prev_month_last_day = @before_prev_month.end_of_month.day
+    @before_prev_month_days = (before_prev_month_first_day..before_prev_month_last_day)
+    if @before_prev_month.beginning_of_month.wday == "1"
+      @before_prev_month_days.unshift(" ")
+    elsif @before_prev_month.beginning_of_month.wday == "2"
+      @before_prev_month_days.unshift(" "," ")
+    elsif @before_prev_month.beginning_of_month.wday == "3"
+      @before_prev_month_days.unshift(" "," "," ")
+    elsif @before_prev_month.beginning_of_month.wday == "4"
+      @before_prev_month_days.unshift(" "," "," "," ")
+    elsif @before_prev_month.beginning_of_month.wday == "5"
+      @before_prev_month_days.unshift(a,a,a,a,a)
+    elsif @before_prev_month.beginning_of_month.wday == "6"
+      @before_prev_month_days.unshift(" "," "," "," "," "," ")
+    end
+    @prev_month = now.prev_month
   end
 
   def edit
