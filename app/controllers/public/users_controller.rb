@@ -4,21 +4,54 @@ class Public::UsersController < ApplicationController
     @before_prev_month = now.ago(2.month)
     before_prev_month_first_day = @before_prev_month.beginning_of_month.day
     before_prev_month_last_day = @before_prev_month.end_of_month.day
-    @before_prev_month_days = (before_prev_month_first_day..before_prev_month_last_day)
-    if @before_prev_month.beginning_of_month.wday == "1"
+    @before_prev_month_days = (before_prev_month_first_day..before_prev_month_last_day).to_a
+    if @before_prev_month.beginning_of_month.wday == 1
       @before_prev_month_days.unshift(" ")
-    elsif @before_prev_month.beginning_of_month.wday == "2"
+    elsif @before_prev_month.beginning_of_month.wday == 2
       @before_prev_month_days.unshift(" "," ")
-    elsif @before_prev_month.beginning_of_month.wday == "3"
+    elsif @before_prev_month.beginning_of_month.wday == 3
       @before_prev_month_days.unshift(" "," "," ")
-    elsif @before_prev_month.beginning_of_month.wday == "4"
+    elsif @before_prev_month.beginning_of_month.wday == 4
       @before_prev_month_days.unshift(" "," "," "," ")
-    elsif @before_prev_month.beginning_of_month.wday == "5"
-      @before_prev_month_days.unshift(a,a,a,a,a)
-    elsif @before_prev_month.beginning_of_month.wday == "6"
+    elsif @before_prev_month.beginning_of_month.wday == 5
+      @before_prev_month_days.unshift(" "," "," "," "," ")
+    elsif @before_prev_month.beginning_of_month.wday == 6
       @before_prev_month_days.unshift(" "," "," "," "," "," ")
     end
     @prev_month = now.prev_month
+    prev_month_first_day = @prev_month.beginning_of_month.day
+    prev_month_last_day = @prev_month.end_of_month.day
+    @prev_month_days = (prev_month_first_day..prev_month_last_day).to_a
+    if @prev_month.beginning_of_month.wday == 1
+      @prev_month_days.unshift(" ")
+    elsif @prev_month.beginning_of_month.wday == 2
+      @prev_month_days.unshift(" "," ")
+    elsif @prev_month.beginning_of_month.wday == 3
+      @prev_month_days.unshift(" "," "," ")
+    elsif @prev_month.beginning_of_month.wday == 4
+      @prev_month_days.unshift(" "," "," "," ")
+    elsif @prev_month.beginning_of_month.wday == 5
+      @prev_month_days.unshift(" "," "," "," "," ")
+    elsif @prev_month.beginning_of_month.wday == 6
+      @prev_month_days.unshift(" "," "," "," "," "," ")
+    end
+    first_day = now.beginning_of_month.day
+    last_day = now.end_of_month.day
+    @days = (first_day..last_day).to_a
+    if now.beginning_of_month.wday == 1
+      @days.unshift(" ")
+    elsif now.beginning_of_month.wday == 2
+      @days.unshift(" "," ")
+    elsif now.beginning_of_month.wday == 3
+      @days.unshift(" "," "," ")
+    elsif now.beginning_of_month.wday == 4
+      @days.unshift(" "," "," "," ")
+    elsif now.beginning_of_month.wday == 5
+      @days.unshift(" "," "," "," "," ")
+    elsif now.beginning_of_month.wday == 6
+      @days.unshift(" "," "," "," "," "," ")
+    end
+    @calendar = Calendar.new
   end
 
   def edit

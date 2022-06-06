@@ -11,21 +11,17 @@
 
   <div class="row">
     <div class="col-3 my-5">
-      <table class="table table-borderd">
+      <p class="text-center"><%= @before_prev_month.year.to_s %>     <%= @before_prev_month.month.to_s %></p>
+      <table class="table table-bordered">
         <thead>
           <tr>
-            <th colspan="7" class="text-center">
-              <%= @before_prev_month.year.to_s %>   <%= @before_prev_month.month.to_s %>
-            </th>
-          </tr>
-          <tr>
-            <td>日</td>
-            <td>月</td>
-            <td>火</td>
-            <td>水</td>
-            <td>木</td>
-            <td>金</td>
-            <td>土</td>
+            <th>日</th>
+            <th>月</th>
+            <th>火</th>
+            <th>水</th>
+            <th>木</th>
+            <th>金</th>
+            <th>土</th>
           </tr>
         </thead>
         <tbody>
@@ -41,18 +37,92 @@
         </tbody>
       </table>
     </div>
+    <div class="col-3 offset-md-1 my-5">
+      <p class="text-center"><%= @prev_month.year.to_s %>     <%= @prev_month.month.to_s %></p>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>日</th>
+            <th>月</th>
+            <th>火</th>
+            <th>水</th>
+            <th>木</th>
+            <th>金</th>
+            <th>土</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @prev_month_days.each_with_index do |day, i| %>
+            <% if (i == 0) || (i % 7 == 0) %>
+              <tr>
+            <% end %>
+            <td><%= day %></td>
+            <% if i == 6 %>
+             </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-3 offset-md-1 my-5">
+      <p class="text-center"><%= Date.current.year.to_s %>     <%= Date.current.month.to_s %></p>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>日</th>
+            <th>月</th>
+            <th>火</th>
+            <th>水</th>
+            <th>木</th>
+            <th>金</th>
+            <th>土</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @days.each_with_index do |day, i| %>
+            <% if (i == 0) || (i % 7 == 0) %>
+              <tr>
+            <% end %>
+            <td>
+              <%= day %>
+            </td>
+            <% if i == 6 %>
+             </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <div class="row">
-    <div class="col-6 offset-md-3 d-flex">
+    <div class="col-12 mb-5">
+      <%= form_with model: @calendar,url: user_calendars_path(current_user.id) do |f| %>
+        <p class="text-center">本日の昼寝時間は・・・</p>
+        <table class="table table-borderless">
+          <tbody class="form-group">
+            <tr>
+              <td style="width: 20%"></td>
+              <td style="width: 50%">
+                <%= f.select :sleeping_time, Calendar.sleeping_times_i18n.invert,{}, {class: "form-control"} %>
+              </td>
+              <td style="width: 30%">
+                <%= f.submit "保存", class: "btn btn-success" %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+    <div class="col-8 offset-md-3 d-flex">
       <div >
         <%= link_to posts_user_path(current_user.id) do %>
-          <button class="btn btn-outline-secondary mx-2">自分の投稿一覧をみる</button>
+          <button class="btn btn-outline-secondary mx-5">自分の投稿一覧をみる</button>
         <% end %>
       </div>
       <div>
         <%= link_to likes_users_path do %>
-          <button class="btn btn-outline-secondary mx-2">いいねした投稿一覧をみる</button>
+          <button class="btn btn-outline-secondary mx-5">いいねした投稿一覧をみる</button>
         <% end %>
       </div>
     </div>

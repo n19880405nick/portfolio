@@ -37,7 +37,7 @@ Rails.application.routes.draw do
       collection do
         get :likes
       end
-      resources :calendars, only: :update
+      resources :calendars, only: [:update, :create ]
     end
     get "tags/:tag_id/posts" => "tags#search", as: "tag_search"
   end
