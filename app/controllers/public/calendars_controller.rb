@@ -4,6 +4,8 @@ class Public::CalendarsController < ApplicationController
 		if @calendar.new_record?
 			@calendar = Calendar.new(calendar_params)
 			@calendar.user_id = current_user.id
+			@calendar.day = Time.now.day
+			@calendar.month = Time.now.month
 			@calendar.save
 		else
 			@calendar.update(calendar_params)
@@ -13,6 +15,6 @@ class Public::CalendarsController < ApplicationController
 
 	private
 	def calendar_params
-		params.require(:calendar).permit(:sleeping_time)
+		params.require(:calendar).permit(:sleeping_time, :day)
 	end
 end
