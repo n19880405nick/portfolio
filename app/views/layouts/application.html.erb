@@ -18,42 +18,45 @@
 
 	<body>
 		<header class="border rounded-pill border-info">
-			<nav class="navbar">
-				<div class="container">
-					<a class="nav-brand" href="/"><%= image_tag('cooltext411810024662321.png') %></a>
-					<form class="form-inline ml-auto">
+			<nav class="navbar navbar-expand-lg navbar-light">
+				<a class="nav-brand ml-5" href="/"><%= image_tag('cooltext411810024662321.png') %></a>
+				<button class="navbar-toggler border-info" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-extend="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav ml-auto">
 						<% if user_signed_in? %>
-							<%= link_to my_page_path do %>
-								<button class="btn btn-outline-info mx-2">マイページ</button>
-							<% end %>
-							<%= link_to new_post_path do %>
-								<button class="btn btn-outline-info mx-2">新規投稿</button>
-							<% end %>
-							<%= link_to posts_path do %>
-								<button class="btn btn-outline-info mx-2">投稿一覧</button>
-							<% end %>
-							<%= link_to destroy_user_session_path, method: :delete do %>
-								<button class="btn btn-outline-info mx-2">ユーザーログアウト</button>
-							<% end %>
+						<li class="nav-item" style="background-color: #fbff94">
+							<%= link_to "マイページ", my_page_path, class: "nav-link btn btn-outline-info mx-3" %>
+						</li>
+						<li class="nav-item" style="background-color: #fbff94">
+							<%= link_to "新規投稿", new_post_path, class: "nav-link btn btn-outline-info mx-3" %>
+						</li>
+						<li class="nav-item" style="background-color: #fbff94">
+							<%= link_to "投稿一覧", posts_path, class: "nav-link btn btn-outline-info mx-3" %>
+						</li>
+						<li class="nav-item" style="background-color: #fbff94">
+							<%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link btn btn-outline-info mx-3" %>
+						</li>
 						<% elsif admin_signed_in? %>
-							<%= link_to admin_users_path do %>
-								<button class="btn btn-outline-info mx-2">ユーザー一覧</button>
-							<% end %>
-							<%= link_to admin_top_path do %>
-								<button class="btn btn-outline-info mx-2">投稿一覧</button>
-							<% end %>
-							<%= link_to destroy_admin_session_path, method: :delete do %>
-								<button class="btn btn-outline-info mx-2">管理者ログアウト</button>
-							<% end %>
+						<li class="nav-item" style="background-color: #fbff94">
+							<%= link_to "ユーザー一覧", admin_users_path, class: "nav-link btn btn-outline-info mx-3" %>
+						</li>
+						<li class="nav-item" style="background-color: #fbff94">
+							<%= link_to "投稿一覧", admin_top_path, class: "nav-link btn btn-outline-info mx-3" %>
+						</li>
+						<li class="nav-item" style="background-color: #fbff94">
+							<%= link_to "管理者ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link btn btn-outline-info mx-3" %>
+						</li>
 						<% else %>
-							<%= link_to new_user_registration_path do %>
-								<button class="btn btn-outline-info mx-2">新規登録</button>
-							<% end %>
-							<%= link_to new_user_session_path do %>
-								<button class="btn btn-outline-info mx-2">ログイン</button>
-							<% end %>
+						<li class="nav-item" style="background-color: #fbff94">
+							<%= link_to "新規登録", new_user_registration_path, class: "nav-link btn btn-outline-info mx-3" %>
+						</li>
+						<li class="nav-item" style="background-color: #fbff94">
+							<%= link_to "ログイン", new_user_session_path, class: "nav-link btn btn-outline-info mx-3" %>
+						</li>
 						<% end %>
-					</form>
+					</ul>
 				</div>
 			</nav>
 		</header>

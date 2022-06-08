@@ -9,8 +9,9 @@
     </div>
   </div>
 
+  <p class="mt-5">今日の昼寝時間を記録して、カレンダーを色付けしていきましょう！</p>
   <div class="row">
-    <div class="col-3 my-5">
+    <div class="col-3">
       <p class="text-center"><%= @before_prev_month.year.to_s %>     <%= @before_prev_month.month.to_s %></p>
       <table class="table table-bordered">
         <thead>
@@ -52,7 +53,7 @@
         </tbody>
       </table>
     </div>
-    <div class="col-3 offset-md-1 my-5">
+    <div class="col-3 offset-md-1">
       <p class="text-center"><%= @prev_month.year.to_s %>     <%= @prev_month.month.to_s %></p>
       <table class="table table-bordered">
         <thead>
@@ -94,7 +95,7 @@
         </tbody>
       </table>
     </div>
-    <div class="col-3 offset-md-1 my-5">
+    <div class="col-3 offset-md-1">
       <p class="text-center"><%= Date.current.year.to_s %>     <%= Date.current.month.to_s %></p>
       <table class="table table-bordered">
         <thead>
@@ -139,7 +140,7 @@
   </div>
 
   <div class="row">
-    <div class="col-12 mb-5">
+    <div class="col-12 my-5">
       <%= form_with model: @calendar,url: user_calendars_path(current_user.id) do |f| %>
         <p class="text-center">本日の昼寝時間は・・・</p>
         <table class="table table-borderless">
