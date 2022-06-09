@@ -11,7 +11,7 @@
 
   <p class="mt-5">今日の昼寝時間を記録して、カレンダーを色付けしていきましょう！</p>
   <div class="row">
-    <div class="col-3">
+    <div class="col-12 col-md-3">
       <p class="text-center"><%= @before_prev_month.year.to_s %>     <%= @before_prev_month.month.to_s %></p>
       <table class="table table-bordered">
         <thead>
@@ -31,7 +31,7 @@
               <tr>
             <% end %>
             <% cal = Calendar.find_by(day: day,month: @before_prev_month) %>
-            <% if cal.present? %>
+            <% if cal.present? && cal.user_id == current_user.id  %>
               <% if cal.sleeping_time_before_type_cast == 0 %>
                 <td style="background-color: #7aeb80">
               <% elsif cal.sleeping_time_before_type_cast == 1 %>
@@ -53,7 +53,7 @@
         </tbody>
       </table>
     </div>
-    <div class="col-3 offset-md-1">
+    <div class="col-12 col-md-3 offset-md-1">
       <p class="text-center"><%= @prev_month.year.to_s %>     <%= @prev_month.month.to_s %></p>
       <table class="table table-bordered">
         <thead>
@@ -73,7 +73,7 @@
               <tr>
             <% end %>
             <% cal = Calendar.find_by(day: day, month: @prev_month) %>
-            <% if cal.present? %>
+            <% if cal.present? && cal.user_id == current_user.id  %>
               <% if cal.sleeping_time_before_type_cast == 0 %>
                 <td style="background-color: #7aeb80">
               <% elsif cal.sleeping_time_before_type_cast == 1 %>
@@ -95,7 +95,7 @@
         </tbody>
       </table>
     </div>
-    <div class="col-3 offset-md-1">
+    <div class="col-12 col-md-3 offset-md-1">
       <p class="text-center"><%= Date.current.year.to_s %>     <%= Date.current.month.to_s %></p>
       <table class="table table-bordered">
         <thead>
@@ -115,7 +115,7 @@
               <tr>
             <% end %>
             <% cal = Calendar.find_by(day: day, month: Time.now.month) %>
-            <% if cal.present? %>
+            <% if cal.present? && cal.user_id == current_user.id %>
               <% if cal.sleeping_time_before_type_cast == 0 %>
                 <td style="background-color: #7aeb80">
               <% elsif cal.sleeping_time_before_type_cast == 1 %>

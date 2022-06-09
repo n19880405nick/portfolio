@@ -24,7 +24,7 @@ body{
 header{
   position: relative;
   width: 70%;
-  height: 100px;
+  height: auto;
   margin: 10px auto;
   z-index: 10;
 }

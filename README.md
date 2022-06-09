@@ -42,3 +42,6 @@ https://drive.google.com/drive/folders/1-zdvYyUhbBb2-6535G4-sOOnNskYN59y?usp=sha
 ## 使用素材
 - イラスト
 　　イラストAC：https://www.ac-illust.com/
+
+## レスポンシブ
+- 半対応
