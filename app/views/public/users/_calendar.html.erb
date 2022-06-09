@@ -1,0 +1,40 @@
+<p class="text-center"><%= month.year.to_s %>     <%= month.month.to_s %></p>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>日</th>
+            <th>月</th>
+            <th>火</th>
+            <th>水</th>
+            <th>木</th>
+            <th>金</th>
+            <th>土</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% days.each_with_index do |day, i| %>
+            <% if (i == 0) || (i % 7 == 0) %>
+              <tr>
+            <% end %>
+            <% cal = Calendar.find_by(day: day,month: month) %>
+            <% if cal.present? && cal.user_id == current_user.id  %>
+              <% if cal.sleeping_time_before_type_cast == 0 %>
+                <td style="background-color: #7aeb80">
+              <% elsif cal.sleeping_time_before_type_cast == 1 %>
+                <td style="background-color: #53e65a">
+              <% elsif cal.sleeping_time_before_type_cast == 2 %>
+                <td style="background-color: #17e821">
+              <% elsif cal.sleeping_time_before_type_cast == 3 %>
+                <td style="background-color: #02a109">
+              <% end %>
+            <% else %>
+              <td>
+            <% end %>
+              <%= day %>
+            </td>
+            <% if i == 6 %>
+             </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>

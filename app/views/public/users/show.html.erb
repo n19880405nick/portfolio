@@ -12,130 +12,13 @@
   <p class="mt-5">今日の昼寝時間を記録して、カレンダーを色付けしていきましょう！</p>
   <div class="row">
     <div class="col-12 col-md-3">
-      <p class="text-center"><%= @before_prev_month.year.to_s %>     <%= @before_prev_month.month.to_s %></p>
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>日</th>
-            <th>月</th>
-            <th>火</th>
-            <th>水</th>
-            <th>木</th>
-            <th>金</th>
-            <th>土</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @before_prev_month_days.each_with_index do |day, i| %>
-            <% if (i == 0) || (i % 7 == 0) %>
-              <tr>
-            <% end %>
-            <% cal = Calendar.find_by(day: day,month: @before_prev_month) %>
-            <% if cal.present? && cal.user_id == current_user.id  %>
-              <% if cal.sleeping_time_before_type_cast == 0 %>
-                <td style="background-color: #7aeb80">
-              <% elsif cal.sleeping_time_before_type_cast == 1 %>
-                <td style="background-color: #53e65a">
-              <% elsif cal.sleeping_time_before_type_cast == 2 %>
-                <td style="background-color: #17e821">
-              <% elsif cal.sleeping_time_before_type_cast == 3 %>
-                <td style="background-color: #02a109">
-              <% end %>
-            <% else %>
-              <td>
-            <% end %>
-              <%= day %>
-            </td>
-            <% if i == 6 %>
-             </tr>
-            <% end %>
-          <% end %>
-        </tbody>
-      </table>
+      <%= render 'calendar', days: @before_prev_month_days, month: @before_prev_month %>
     </div>
     <div class="col-12 col-md-3 offset-md-1">
-      <p class="text-center"><%= @prev_month.year.to_s %>     <%= @prev_month.month.to_s %></p>
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>日</th>
-            <th>月</th>
-            <th>火</th>
-            <th>水</th>
-            <th>木</th>
-            <th>金</th>
-            <th>土</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @prev_month_days.each_with_index do |day, i| %>
-            <% if (i == 0) || (i % 7 == 0) %>
-              <tr>
-            <% end %>
-            <% cal = Calendar.find_by(day: day, month: @prev_month) %>
-            <% if cal.present? && cal.user_id == current_user.id  %>
-              <% if cal.sleeping_time_before_type_cast == 0 %>
-                <td style="background-color: #7aeb80">
-              <% elsif cal.sleeping_time_before_type_cast == 1 %>
-                <td style="background-color: #53e65a">
-              <% elsif cal.sleeping_time_before_type_cast == 2 %>
-                <td style="background-color: #17e821">
-              <% elsif cal.sleeping_time_before_type_cast == 3 %>
-                <td style="background-color: #02a109">
-              <% end %>
-            <% else %>
-              <td>
-            <% end %>
-              <%= day %>
-            </td>
-            <% if i == 6 %>
-             </tr>
-            <% end %>
-          <% end %>
-        </tbody>
-      </table>
+      <%= render 'calendar', days: @prev_month_days, month: @prev_month %>
     </div>
     <div class="col-12 col-md-3 offset-md-1">
-      <p class="text-center"><%= Date.current.year.to_s %>     <%= Date.current.month.to_s %></p>
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>日</th>
-            <th>月</th>
-            <th>火</th>
-            <th>水</th>
-            <th>木</th>
-            <th>金</th>
-            <th>土</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @days.each_with_index do |day, i| %>
-            <% if (i == 0) || (i % 7 == 0) %>
-              <tr>
-            <% end %>
-            <% cal = Calendar.find_by(day: day, month: Time.now.month) %>
-            <% if cal.present? && cal.user_id == current_user.id %>
-              <% if cal.sleeping_time_before_type_cast == 0 %>
-                <td style="background-color: #7aeb80">
-              <% elsif cal.sleeping_time_before_type_cast == 1 %>
-                <td style="background-color: #53e65a">
-              <% elsif cal.sleeping_time_before_type_cast == 2 %>
-                <td style="background-color: #17e821">
-              <% elsif cal.sleeping_time_before_type_cast == 3 %>
-                <td style="background-color: #02a109">
-              <% end %>
-            <% else %>
-              <td>
-            <% end %>
-            <%= day %>
-            </td>
-            <% if i == 6 %>
-             </tr>
-            <% end %>
-          <% end %>
-        </tbody>
-      </table>
+      <%= render 'calendar', days: @days, month: Time.now.month %>
     </div>
   </div>
 
