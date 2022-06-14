@@ -57,4 +57,50 @@ describe 'ユーザー登録' do
       end
     end
   end
+  describe 'ログイン画面のテスト' do
+    before do
+      visit new_user_session_path
+    end
+    context '表示の確認' do
+      it 'メールアドレス入力欄が表示されているか' do
+        expect(page).to have_field 'user[email]'
+      end
+      it 'パスワード入力欄が表示されているか' do
+        expect(page).to have_field 'user[password]'
+      end
+    end
+    context 'ログイン処理に関するテスト' do
+      before do
+        fill_in 'user[email]', with: user.email
+        fill_in 'user[password]', with: user.password
+        click_button 'ログイン'
+      end
+      it 'ログイン後のリダイレクト先がマイページになっているか' do
+        expect(current_path).to eq my_page_path
+      end
+    end
+    context 'ログイン後のヘッダに関するテスト' do
+      before do
+        fill_in 'user[email]', with: user.email
+        fill_in 'user[password]', with: user.password
+        click_button 'ログイン'
+      end
+      it 'ヘッダに「マイページ」リンクが表示されているか' do
+        expect(page).to have_link "マイページ", href: my_page_path
+      end
+      it 'ヘッダに「新規投稿」リンクが表示されているか' do
+        expect(page).to have_link "新規投稿", href: new_post_path
+      end
+      it 'ヘッダに「投稿一覧」リンクが表示されているか' do
+        expect(page).to have_link "投稿一覧", href: posts_path
+      end
+      it 'ヘッダに「ログアウト」リンクが表示されているか' do
+        expect(page).to have_link "ログアウト", href: destroy_user_session_path
+      end
+      it 'ログアウト後のリダイレクト先がトップページになっているか' do
+        click_on 'ログアウト'
+        expect(current_path).to eq root_path
+      end
+    end
+  end
 end
