@@ -7,12 +7,12 @@
       <%= form_with model: @post, url: post_path(@post.id), method: :patch do |f| %>
         <div class="form-group">
           <h3>題名</h3>
-          <%= f.text_field :title, class: "form-control" %>
+          <%= f.text_field :title, class: "form-control", :required => true %>
         </div>
 
         <div class="form-group">
           <h3>投稿本文</h3>
-          <%= f.text_area :contribution, class: "form-control", rows: 10 %>
+          <%= f.text_area :contribution, class: "form-control", rows: 10, :required => true %>
         </div>
 
         <div class="my-5 text-center">

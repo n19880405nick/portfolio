@@ -4,6 +4,8 @@ require 'rails_helper'
 
 describe 'ユーザー登録' do
   let!(:user) { create(:user)}
+  let!(:post) { create(:post, user: user)}
+  let!(:like) { create(:like, user: user, post: post)}
   describe 'トップページのテスト' do
     before do
       visit root_path
