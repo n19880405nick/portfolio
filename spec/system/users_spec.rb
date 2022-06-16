@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe 'ユーザー登録' do
+describe 'ユーザー' do
   let!(:user) { create(:user)}
   let!(:post) { create(:post, user: user)}
   let!(:like) { create(:like, user: user, post: post)}
@@ -102,6 +102,33 @@ describe 'ユーザー登録' do
       it 'ログアウト後のリダイレクト先がトップページになっているか' do
         click_on 'ログアウト'
         expect(current_path).to eq root_path
+      end
+    end
+  end
+  describe 'マイページのテスト' do
+    before do
+      sign_in user
+      visit my_page_path
+      @calendar = Calendar.new(user: user, sleeping_time: 1, day: Time.now.day, month: Time.now.month)
+    end
+    context '表示の確認' do
+      it '名前が表示されているか' do
+        expect(page).to have_content user.name
+      end
+      it 'メールアドレスが表示されているか' do
+        expect(page).to have_content user.email
+      end
+      it '「ユーザー編集」へのリンクがあるか' do
+        expect(page).to have_link '', href: edit_user_path(user)
+      end
+      it 'カレンダーが表示されているか' do
+        expect(page).to have_content Time.now.month
+      end
+      it '睡眠時間のセレクトボックスがあるか' do
+        expect(page).to have_field 'calendar[sleeping_time]'
+      end
+      it '選択して睡眠時間がカレンダーに反映されているか' do
+
       end
     end
   end
