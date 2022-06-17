@@ -109,7 +109,6 @@ describe 'ユーザー' do
     before do
       sign_in user
       visit my_page_path
-      @calendar = Calendar.new(user: user, sleeping_time: 1, day: Time.now.day, month: Time.now.month)
     end
     context '表示の確認' do
       it '名前が表示されているか' do
@@ -125,10 +124,11 @@ describe 'ユーザー' do
         expect(page).to have_content Time.now.month
       end
       it '睡眠時間のセレクトボックスがあるか' do
-        expect(page).to have_field 'calendar[sleeping_time]'
+        expect(page).to have_select 'calendar[sleeping_time]'
       end
-      it '選択して睡眠時間がカレンダーに反映されているか' do
-
+      it '睡眠時間がカレンダーに登録されているか' do
+        select '30分未満', from: 'calendar[sleeping_time]'
+        expect{click_on '保存'}.to change(Calendar.all, :count).by(1)
       end
     end
   end
