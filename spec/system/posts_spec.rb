@@ -96,7 +96,7 @@ describe '投稿' do
     end
     context 'いいねのテスト' do
       it 'いいねを押したら１増える'  do
-        expect(post :create, xhr: true).to change(user.likes, :count).by(1)
+        expect{click_on 'good!'}.to change(user.likes, :count).by(1)
       end
     end
     context 'コメント投稿のテスト' do

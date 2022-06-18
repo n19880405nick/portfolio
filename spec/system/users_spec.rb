@@ -126,9 +126,46 @@ describe 'ユーザー' do
       it '睡眠時間のセレクトボックスがあるか' do
         expect(page).to have_select 'calendar[sleeping_time]'
       end
+      it '「自分の投稿一覧」リンクが表示されているか' do
+        expect(page).to have_link '', href: posts_user_path(user)
+      end
+      it '「いいねした投稿一覧」リンクが表示されているか' do
+        expect(page).to have_link '', href: likes_users_path
+      end
+    end
+    context '睡眠時間処理に関するテスト' do
       it '睡眠時間がカレンダーに登録されているか' do
         select '30分未満', from: 'calendar[sleeping_time]'
         expect{click_on '保存'}.to change(Calendar.all, :count).by(1)
+      end
+      it '登録した睡眠時間が、表示されているか' do
+        select '30分未満', from: 'calendar[sleeping_time]'
+        click_on '保存'
+        expect(page).to have_selector 'td' ,style: 'background-color: #7aeb80'
+      end
+    end
+  end
+  describe '自分の投稿一覧画面のテスト' do
+    before do
+      sign_in user
+      visit posts_user_path(user)
+    end
+    context '表示の確認' do
+      it '自分の投稿が一覧に表示されている' do
+        click_on 'この記事を読む'
+        expect(page).to have_content user.name
+      end
+    end
+  end
+  describe 'いいねした投稿一覧画面のテスト' do
+    before do
+      sign_in user
+      visit likes_users_path
+    end
+    context '表示の確認' do
+      it 'いいねした投稿が一覧に表示されている' do
+        click_on 'この記事を読む'
+        expect(like.post_id).to eq post.id
       end
     end
   end
