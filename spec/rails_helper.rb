@@ -35,15 +35,15 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 RSpec.configure do |config|
-  # config.before(:each) do |example|
-  #   if example.metadata[:type] == :system
-  #     if example.metadata[:js]
-  #       driven_by :selenium_chrome_headless, screen_size: [1400, 1400]
-  #     else
-  #       driven_by :rack_test
-  #     end
-  #   end
-  # end
+  config.before(:each) do |example|
+    if example.metadata[:type] == :system
+      if example.metadata[:js]
+        driven_by :selenium_chrome_headless, screen_size: [1400, 1400]
+      else
+        driven_by :rack_test
+      end
+    end
+  end
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
@@ -76,38 +76,39 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
   config.include FactoryBot::Syntax::Methods
   config.include Devise::Test::IntegrationHelpers, type: :system
+  config.include Warden::Test::Helpers
 end
-# Capybara.register_driver :selenium_chrome_headless do |app|
-#   options = Selenium::WebDriver::Chrome::Options.new
-#   options.args << '--disable-gpu'
-#   options.args << '--no-sandbox'
-#   options.args << '--window-size=1024,768'
-#   options.args << '--headless' unless ENV['DEBUG_JS_TEST'] == '1'
-#   Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
-# end
-# Capybara.configure do |config|
-#   config.javascript_driver      = ENV["JS_TEST_DRIVER"]&.to_sym || :selenium_chrome_headless
-#   config.default_max_wait_time  = 20
-#   config.enable_aria_label = true
-# end
+Capybara.register_driver :selenium_chrome_headless do |app|
+  options = Selenium::WebDriver::Chrome::Options.new
+  options.args << '--disable-gpu'
+  options.args << '--no-sandbox'
+  options.args << '--window-size=1024,768'
+  options.args << '--headless' unless ENV['DEBUG_JS_TEST'] == '1'
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+end
+Capybara.configure do |config|
+  config.javascript_driver      = ENV["JS_TEST_DRIVER"]&.to_sym || :selenium_chrome_headless
+  config.default_max_wait_time  = 20
+  config.enable_aria_label = true
+end
 # Capybara.javascript_driver = :selenium_chrome_headless
-require 'capybara/rspec'
-require 'selenium-webdriver'
+# require 'capybara/rspec'
+# require 'selenium-webdriver'
 
-Capybara.register_driver :chrome do |app|
-  Capybara::Selenium::Driver.new(app, browser: :chrome)
-end
+# Capybara.register_driver :chrome do |app|
+#   Capybara::Selenium::Driver.new(app, browser: :chrome)
+# end
 
-Capybara.register_driver :headless_chrome do |app|
-  capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
-    chromeOptions: { args: %w[headless disable-gpu] }
-  )
+# Capybara.register_driver :headless_chrome do |app|
+#   capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
+#     chromeOptions: { args: %w[headless disable-gpu] }
+#   )
 
-  Capybara::Selenium::Driver.new(
-    app,
-    browser: :chrome,
-    desired_capabilities: capabilities
-  )
-end
+#   Capybara::Selenium::Driver.new(
+#     app,
+#     browser: :chrome,
+#     desired_capabilities: capabilities
+#   )
+# end
 
-Capybara.javascript_driver = :headless_chrome
+# Capybara.javascript_driver = :headless_chrome
