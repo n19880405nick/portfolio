@@ -75,7 +75,7 @@ describe 'ユーザー' do
       before do
         fill_in 'user[email]', with: user.email
         fill_in 'user[password]', with: user.password
-        click_button 'ログイン'
+        click_button 'ログインする'
       end
       it 'ログイン後のリダイレクト先がマイページになっているか' do
         expect(current_path).to eq my_page_path
