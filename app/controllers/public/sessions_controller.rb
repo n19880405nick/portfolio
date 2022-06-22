@@ -28,6 +28,7 @@ class Public::SessionsController < Devise::SessionsController
   before_action :user_state, only: [:create]
 
   protected
+
   # 退会しているかを判断するメソッド
   def user_state
     ## 【処理内容１】入力されたemailからアカウントを1件取得

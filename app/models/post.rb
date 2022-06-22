@@ -10,7 +10,6 @@ class Post < ApplicationRecord
   end
 
   def self.search_for(keyword)
-    Post.where(['title LIKE ? or contribution LIKE ?','%'+keyword+'%','%'+keyword+'%'])
+    Post.where(['title LIKE ? or contribution LIKE ?', '%' + keyword + '%', '%' + keyword + '%'])
   end
-
 end

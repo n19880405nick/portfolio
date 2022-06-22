@@ -8,15 +8,15 @@ class Public::UsersController < ApplicationController
     if @before_prev_month.beginning_of_month.wday == 1
       @before_prev_month_days.unshift(" ")
     elsif @before_prev_month.beginning_of_month.wday == 2
-      @before_prev_month_days.unshift(" "," ")
+      @before_prev_month_days.unshift(" ", " ")
     elsif @before_prev_month.beginning_of_month.wday == 3
-      @before_prev_month_days.unshift(" "," "," ")
+      @before_prev_month_days.unshift(" ", " ", " ")
     elsif @before_prev_month.beginning_of_month.wday == 4
-      @before_prev_month_days.unshift(" "," "," "," ")
+      @before_prev_month_days.unshift(" ", " ", " ", " ")
     elsif @before_prev_month.beginning_of_month.wday == 5
-      @before_prev_month_days.unshift(" "," "," "," "," ")
+      @before_prev_month_days.unshift(" ", " ", " ", " ", " ")
     elsif @before_prev_month.beginning_of_month.wday == 6
-      @before_prev_month_days.unshift(" "," "," "," "," "," ")
+      @before_prev_month_days.unshift(" ", " ", " ", " ", " ", " ")
     end
     @prev_month = now.prev_month
     prev_month_first_day = @prev_month.beginning_of_month.day
@@ -25,15 +25,15 @@ class Public::UsersController < ApplicationController
     if @prev_month.beginning_of_month.wday == 1
       @prev_month_days.unshift(" ")
     elsif @prev_month.beginning_of_month.wday == 2
-      @prev_month_days.unshift(" "," ")
+      @prev_month_days.unshift(" ", " ")
     elsif @prev_month.beginning_of_month.wday == 3
-      @prev_month_days.unshift(" "," "," ")
+      @prev_month_days.unshift(" ", " ", " ")
     elsif @prev_month.beginning_of_month.wday == 4
-      @prev_month_days.unshift(" "," "," "," ")
+      @prev_month_days.unshift(" ", " ", " ", " ")
     elsif @prev_month.beginning_of_month.wday == 5
-      @prev_month_days.unshift(" "," "," "," "," ")
+      @prev_month_days.unshift(" ", " ", " ", " ", " ")
     elsif @prev_month.beginning_of_month.wday == 6
-      @prev_month_days.unshift(" "," "," "," "," "," ")
+      @prev_month_days.unshift(" ", " ", " ", " ", " ", " ")
     end
     first_day = now.beginning_of_month.day
     last_day = now.end_of_month.day
@@ -41,15 +41,15 @@ class Public::UsersController < ApplicationController
     if now.beginning_of_month.wday == 1
       @days.unshift(" ")
     elsif now.beginning_of_month.wday == 2
-      @days.unshift(" "," ")
+      @days.unshift(" ", " ")
     elsif now.beginning_of_month.wday == 3
-      @days.unshift(" "," "," ")
+      @days.unshift(" ", " ", " ")
     elsif now.beginning_of_month.wday == 4
-      @days.unshift(" "," "," "," ")
+      @days.unshift(" ", " ", " ", " ")
     elsif now.beginning_of_month.wday == 5
-      @days.unshift(" "," "," "," "," ")
+      @days.unshift(" ", " ", " ", " ", " ")
     elsif now.beginning_of_month.wday == 6
-      @days.unshift(" "," "," "," "," "," ")
+      @days.unshift(" ", " ", " ", " ", " ", " ")
     end
     @calendar = Calendar.new
   end
@@ -85,8 +85,8 @@ class Public::UsersController < ApplicationController
   end
 
   private
+
   def user_params
     params.require(:user).permit(:name, :email)
   end
-
 end

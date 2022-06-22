@@ -29,7 +29,7 @@
 - 昼寝をしたことで起きた良いことを、他人にシェアしたいとき
 - 自分に昼寝は必要だったかどうか、確認するとき
 
-## 設計書
+## 設計書、仕様書
 https://drive.google.com/drive/folders/1-zdvYyUhbBb2-6535G4-sOOnNskYN59y?usp=sharing
 
 ## 開発環境
@@ -42,6 +42,12 @@ https://drive.google.com/drive/folders/1-zdvYyUhbBb2-6535G4-sOOnNskYN59y?usp=sha
 ## 使用素材
 - イラスト
 　　イラストAC：https://www.ac-illust.com/
+- ロゴ
+　　COOLTEXT：https://ja.cooltext.com/
+
+## 品質管理
+- Rspec 3.11
+- rubocop 0.93.1
 
 ## レスポンシブ
 - 半対応
