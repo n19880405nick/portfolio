@@ -16,6 +16,6 @@ class Public::CalendarsController < ApplicationController
   private
 
   def calendar_params
-    params.require(:calendar).permit(:sleeping_time, :day)
+    params.require(:calendar).permit(:sleeping_time, :day, :month)
   end
 end

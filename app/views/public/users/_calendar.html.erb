@@ -16,7 +16,7 @@
             <% if (i == 0) || (i % 7 == 0) %>
               <tr>
             <% end %>
-            <% cal = Calendar.find_by(day: day,month: month) %>
+            <% cal = Calendar.find_by(day: day,month: month.month.to_s) %>
             <% if cal.present? && cal.user_id == current_user.id  %>
               <% if cal.sleeping_time_before_type_cast == 0 %>
                 <td style="background-color: #7aeb80">
