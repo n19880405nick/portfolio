@@ -77,20 +77,20 @@
 						</p>
 					</div>
 					<div class="col-12 col-md-6 mt-2 form-group">
-						<table class="table table-borderless">
-							<thead>
-								<tr>
-									<%= form_with url: search_path do  |f| %>
+						<%= form_with url: search_path, method: :get do  |f| %>
+							<table class="table table-borderless">
+								<thead>
+									<tr>
 										<td style="width: 85%">
 											<%= f.search_field :keyword, placeholder: "キーワードを入力してください", class: "form-control" %>
 										</td>
 										<td style="width: 15%">
 											<%= f.submit "検索", class: "form-control" %>
 										</td>
-									<% end %>
-								</tr>
-							</thead>
-						</table>
+									</tr>
+								</thead>
+							</table>
+						<% end %>
 						<p>最新の投稿に紐づいたタグ</p>
 						<% @tags_all.each do |tag| %>
 							<%= link_to tag_search_path(tag.id) do %>

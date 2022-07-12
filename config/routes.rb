@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root to: "homes#top"
-    post "search_result" => "homes#search", as: "search"
+    get "search_result" => "homes#search", as: "search"
     resources :posts do
       resources :comments, only: [:destroy, :create]
       resource :likes, only: [:create, :destroy]

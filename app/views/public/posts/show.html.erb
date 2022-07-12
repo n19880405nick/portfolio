@@ -41,17 +41,17 @@
     <% end %>
     <% if user_signed_in? %>
       <div class="col-12 form-group my-2">
-        <table class="table table-borderless">
-          <thead>
-            <tr>
-              <%= form_with model: @comment, url: post_comments_path(@post.id) do |f| %>
+        <%= form_with model: @comment, url: post_comments_path(@post.id) do |f| %>
+          <table class="table table-borderless">
+            <thead>
+              <tr>
                 <td style="width: 15%"></td>
-                <td style="width: 70%"><%= f.text_area :comment, class: "form-control", rows: 2 %></td>
+                <td style="width: 70%"><%= f.text_area :comment, class: "form-control", rows: 2, :required => true %></td>
                 <td style="width: 15%"><%= f.submit "コメントする", class: "btn btn-success" %></td>
-              <% end %>
-            </tr>
-          </thead>
-        </table>
+              </tr>
+            </thead>
+          </table>
+        <% end %>
       </div>
     <% end %>
   </div>
